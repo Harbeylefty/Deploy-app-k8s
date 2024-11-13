@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Appliction
+metadata:
+  name: myapp-argocd
+  namespace: argocd
+spec:
+  project: default
+  
+  source: 
+    repoUrl: https://github.com/Harbeylefty/Deploy-app-k8s.git
+    targetRevision: HEAD 
+    path: Kubernetes 
+
+  destination: 
+    server: https://kubernetes.default.svc
+    namespace: myapp
+
+  syncPolicy:
+    syncOptions: 
+    - CreateNamespace=true
+
+  automated:
+    selfHeal: true
+    prune: true 
